@@ -95,7 +95,7 @@ async function init() {
 <!-- CODE GOES HERE -->
 const parseDate = d3.timeParse("%Y-%m-%d");
 
-const data = await d3.csv("History_of_Mass_Shootings_in_the_USA", function(d){
+const data = await d3.csv("https://raw.githubusercontent.com/DHUIUC/dhuiuc.github.io/main/History_of_Mass_Shootings_in_the_USA.csv", function(d){
 	return {
 		date: parseDate(d.Date),
 		city: d.City,
@@ -107,10 +107,7 @@ const data = await d3.csv("History_of_Mass_Shootings_in_the_USA", function(d){
 	};
 });
 
-PlotLine(data);
-}
-
-function PlotLine(data){
+console.log(data);
 
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
     width = 660 - margin.left - margin.right,
@@ -144,6 +141,7 @@ svg.append("g")
       .call(d3.axisLeft(y));
 
 svg.append("path")
+	  .data(data)
       .attr("fill", "none")
       .attr("stroke", "steelblue")
       .attr("stroke-width", 1.5)
