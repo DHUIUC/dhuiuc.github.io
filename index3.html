@@ -113,10 +113,7 @@ var hxw = 600
   let labels = null;
   let nodes = [];
 
-  // charge is dependent on size of the bubble, so bigger towards the middle
-  function charge(d) {
-    return Math.pow(d.radius, 2.0) * 0.01
-  }
+
 
   // create a force simulation and add forces to it
   const simulation = d3.forceSimulation()
@@ -129,7 +126,43 @@ var hxw = 600
   // force simulation starts up automatically, which we don't want as there aren't any nodes yet
   simulation.stop();
 
+  const fillColour = d3.scaleOrdinal()
+  	.domain(["1", "2", "3", "5", "99"])
+  	.range(["gold", "blue", "green", "yellow", "black", "grey", "darkgreen", "pink", "brown", "slateblue", "grey1", "orange"]);
+
 //BUBBLE CODE STOP
+
+  // charge is dependent on size of the bubble, so bigger towards the middle
+  function charge(d) {
+    return Math.pow(d.radius, 2.0) * 0.01
+  }
+
+function createNodes(rawData) {
+    // use max size in the data as the max in the scale's domain
+    // note we have to ensure that size is a number
+    const maxSize = d3.max(rawData, d => +d.size);
+
+    // size bubbles based on area
+    const radiusScale = d3.scaleSqrt()
+      .domain([0, maxSize])
+      .range([0, 80])
+
+    // use map() to convert raw data into node data
+    const myNodes = rawData.map(d => ({
+      ...d,
+      radius: radiusScale(+d.size),
+      size: +d.size,
+      x: Math.random() * 900,
+      y: Math.random() * 800
+    }))
+
+    return myNodes;
+  }
+
+//bubble funcs
+
+
+
 
 var x = d3.scaleLog().domain([10,150]).range([0,hxw]);
 var y = d3.scaleLog().domain([10,150]).range([hxw,0]);
@@ -139,8 +172,8 @@ var tooltip = d3.select("body").append("div")
 	.style("opacity", 0);
 
 d3.select("svg")
-	.attr("width",hxw + 2*margin)
-	.attr("height",hxw + 2*margin)
+	.attr("width",hxw)
+	.attr("height",hxw)
 	.append("g")
 	.attr("transform","translate("+margin+","+margin+")")
 	.selectAll("circle").data(data)
@@ -148,7 +181,7 @@ d3.select("svg")
 	.attr("cx", function(d,i){ return x(d.averageCityMPG);})
 	.attr("cy", function(d,i){ return y(d.averageHighwayMPG);})
 	.attr("r",function(d,i){ return +d.engineCylinders + 2;})
-	.on("mouseover", function(){ tooltip.style("opacity", 1);})
+	.on("mouseover", function(){ tooltip.opacity=1;})
 	.on("mouseover", function(){ tooltip.style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px");})
 	.on("mouseover", function(d){ tooltip.text(d.make);});
 
