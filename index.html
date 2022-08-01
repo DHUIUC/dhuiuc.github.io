@@ -7,7 +7,7 @@
 <script>
 async function init() {
 <!-- CODE GOES HERE -->
-const data = await d3.csv('https://docs.google.com/spreadsheets/d/1m87m-WGTWL0eAOJ-0_OCkOhXXvr4mofHY4woxhVloy8/edit?usp=sharing', function(d){
+const data = await d3.csv('Data_Breaches_EN_V2_2004_2017_20180220.csv', function(d){
 	return {
 		entity: d.Entity,
 		alternativeName: d.AlternativeName,
