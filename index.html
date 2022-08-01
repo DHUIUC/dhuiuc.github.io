@@ -2,12 +2,22 @@
 <script src='https://d3js.org/d3.v5.min.js'></script>
 <style> circle {fill: lightblue; stroke: black;} </style>
 <body onload='init()'>
-<svg width=300 height=300>
+<svg width=600 height=600>
 </svg>
 <script>
 async function init() {
 <!-- CODE GOES HERE -->
-const data = await d3.csv('Data_Breaches_EN_V2_2004_2017_20180220.csv');
+const data = await d3.csv('Data_Breaches_EN_V2_2004_2017_20180220.csv', function(d){
+	return {
+		entity: d.Entity,
+		alternativeName: d.Alternative_Name,
+		story: d.Story,
+		year: d.Year,
+		recordsLost: d.Records_Lost,
+		sector: d.Sector,
+		methodOfLeak: d.Method_of_Leak
+	};
+});
 
 console.log(data)
 
