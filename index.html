@@ -129,7 +129,7 @@ d3.select("svg").append("g")
 	.call(d3.axisLeft(y).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")))
 	.append("text")
     .attr("fill", "black")
-    .attr("transform","translate("+-margin+","+(hxw/2)+")")
+    .attr("transform","translate("+0+","+(hxw/2)+")")
     .text("Highway MPG");
 	
 d3.select("svg").append("g")
