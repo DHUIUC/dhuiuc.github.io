@@ -108,7 +108,7 @@ var y = d3.scaleLog().domain([10,150]).range([hxw,0]);
 
 var tooltip = d3.select("body").append("div")	
     .attr("class", "tooltip")				
-	.style("visibility", "hidden");
+	.style("opacity", 0);
 
 d3.select("svg")
 	.attr("width",hxw + 2*margin)
@@ -120,7 +120,7 @@ d3.select("svg")
 	.attr("cx", function(d,i){ return x(d.averageCityMPG);})
 	.attr("cy", function(d,i){ return y(d.averageHighwayMPG);})
 	.attr("r",function(d,i){ return +d.engineCylinders + 2;})
-	.on("mouseover", function(){ tooltip.style.visibility = "visible";})
+	.on("mouseover", function(){ tooltip.style("opacity", 1);})
 	.on("mouseover", function(){ tooltip.style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px");})
 	.on("mouseover", function(d){ tooltip.text(d.make);});
 
