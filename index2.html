@@ -110,7 +110,7 @@ const data = await d3.csv("https://raw.githubusercontent.com/DHUIUC/dhuiuc.githu
 console.log(data);
 
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 660 - margin.left - margin.right,
+    width = 1200 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
 var svg = d3.select("svg")
@@ -145,6 +145,7 @@ svg.append("path")
       .attr("fill", "none")
       .attr("stroke", "steelblue")
       .attr("stroke-width", 1.5)
+	  .attr("stroke-linejoin", "round")
       .attr("d", d3.line()
         .x(function(d) { return x(d.date) })
         .y(function(d) { return y(d.dead) })
