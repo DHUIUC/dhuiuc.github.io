@@ -106,6 +106,10 @@ var hxw = 600
 var x = d3.scaleLog().domain([10,150]).range([0,hxw]);
 var y = d3.scaleLog().domain([10,150]).range([hxw,0]);
 
+var tooltip = d3.select("body").append("div")	
+    .attr("class", "tooltip")				
+	.style("visibility", "hidden");
+
 d3.select("svg")
 	.attr("width",hxw + 2*margin)
 	.attr("height",hxw + 2*margin)
@@ -116,10 +120,9 @@ d3.select("svg")
 	.attr("cx", function(d,i){ return x(d.averageCityMPG);})
 	.attr("cy", function(d,i){ return y(d.averageHighwayMPG);})
 	.attr("r",function(d,i){ return +d.engineCylinders + 2;})
-	.on("mouseover", function(){return tooltip.style("visibility", "visible");})
-	.on("mouseover", function(){return tooltip.style("left", (d3.event.pageX) + "px");})
-	.on("mouseover", function(){return tooltip.style("top", (d3.event.pageY - 28) + "px");})
-	.on("mouseover", function(d){return tooltip.text(d.make);});
+	.on("mouseover", function(){ tooltip.style("visibility", "visible");})
+	.on("mouseover", function(){ tooltip.style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px");})
+	.on("mouseover", function(d){ tooltip.text(d.make);});
 
 d3.select("svg").append("g")
 	.attr("transform","translate("+margin+","+margin+")")
@@ -137,9 +140,7 @@ d3.select("svg").append("g")
     .attr("transform","translate("+(hxw/2)+","+margin+")")
     .text("City MPG");
 	
-var tooltip = d3.select("body").append("div")	
-    .attr("class", "tooltip")				
-	.style("visibility", "hidden");
+
 
 
 <!-- CODE ENDS HERE-->
