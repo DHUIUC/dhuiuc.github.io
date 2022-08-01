@@ -32,15 +32,32 @@ d3.select("svg")
 	.enter().append("circle")
 	.attr("cx", function(d,i){ return x(d.averageCityMPG);})
 	.attr("cy", function(d,i){ return y(d.averageHighwayMPG);})
-	.attr("r",function(d,i){ return +d.engineCylinders + 2;});
+	.attr("r",function(d,i){ return +d.engineCylinders + 2;})
+	.on("mouseover", function(){return tooltip.style("visibility", "visible");})
+	.on("mouseover", function(){return tooltip.style("left", (d3.event.pageX) + "px");})
+	.on("mouseover", function(){return tooltip.style("top", (d3.event.pageY - 28) + "px");});
+	.on("mouseover", function(d){return tooltip.text(d.make);});
 
 d3.select("svg").append("g")
 	.attr("transform","translate("+margin+","+margin+")")
-	.call(d3.axisLeft(y).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")));
+	.call(d3.axisLeft(y).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")))
+	.append("text")
+    .attr("fill", "black")
+    .attr("transform","translate("+-margin+","+(hxw/2)+")")
+    .text("Highway MPG");
 	
 d3.select("svg").append("g")
 	.attr("transform","translate("+margin+","+(hxw+margin)+")")
-	.call(d3.axisBottom(x).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")));
+	.call(d3.axisBottom(x).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")))
+	.append("text")
+    .attr("fill", "black")
+    .attr("transform","translate("+(hxw/2)+","+margin+")")
+    .text("City MPG");
+	
+var div = d3.select("body").append("div")	
+    .attr("class", "tooltip")				
+	.style("visibility", "hidden");
+
 
 <!-- CODE ENDS HERE-->
 }
