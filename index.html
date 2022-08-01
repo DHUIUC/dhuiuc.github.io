@@ -106,8 +106,7 @@ var hxw = 600
 var x = d3.scaleLog().domain([10,150]).range([0,hxw]);
 var y = d3.scaleLog().domain([10,150]).range([hxw,0]);
 
-var tooltip = d3.select("body").append("div")
-	.id("tooltip")
+var tooltip = d3.select("svg").append("div")
     .attr("class", "tooltip")				
 	.style("opacity", 0);
 
@@ -121,7 +120,7 @@ d3.select("svg")
 	.attr("cx", function(d,i){ return x(d.averageCityMPG);})
 	.attr("cy", function(d,i){ return y(d.averageHighwayMPG);})
 	.attr("r",function(d,i){ return +d.engineCylinders + 2;})
-	.on("mouseover", function(d){ document.getElementById("tooltip").style.opacity=1;})
+	.on("mouseover", function(d){ tooltip.style.opacity=1;})
 	.on("mouseover", function(d){ tooltip.style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px");})
 	.on("mouseover", function(d){ tooltip.text(d.make);});
 
