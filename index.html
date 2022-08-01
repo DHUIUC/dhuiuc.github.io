@@ -7,16 +7,16 @@
 <script>
 async function init() {
 <!-- CODE GOES HERE -->
-const data = await d3.csv('Data_Breaches_EN_V2_2004_2017_20180220.csv', function(d){
-	return {
-		entity: d.Entity,
-		alternativeName: d.AlternativeName,
-		story: d.Story,
-		year: d.Year,
-		recordsLost: d.RecordsLost,
-		sector: d.Sector,
-		methodOfLeak: d.MethodofLeak
-	};
+const data = await d3.csv('https://docs.google.com/spreadsheets/d/160elOslLzUCHKEZGHIiHqU5Yq_HNjIllFtTCSKam_hQ/edit?usp=sharing', function(d){
+    return { date : d3.timeParse("%Y-%m-%d")(d.Date),
+			 city : d.City,
+			 state : d.state,
+			 dead : d.dead,
+			 injured : d.injured,
+			 total : d.total,
+			 description : d.description,
+			 year : d.year
+  };
 });
 
 console.log(data)
@@ -24,19 +24,26 @@ console.log(data)
 var margin = 80
 var hxw = 600
 
-var x = d3.scaleBand().domain([2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017]).range([0,hxw]);
-var y = d3.scaleLinear().domain([0,1370000000]).range([hxw,0]);
+var x = d3.scaleTime().domain(d3.extent(data, function(d) { return d.date; })).range([ 0, width ]);
+var y = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.dead; })]).range([ height, 0 ]);
+
+//var x = d3.scaleBand().domain([2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017]).range([0,hxw]);
+//var y = d3.scaleLinear().domain([0,1370000000]).range([hxw,0]);
 
 d3.select("svg")
 	.attr("width",hxw + 2*margin)
 	.attr("height",hxw + 2*margin)
 	.append("g")
 	.attr("transform","translate("+margin+","+margin+")")
-	.selectAll("circle").data(data)
-	.enter().append("circle")
-	.attr("cx", function(d,i){ return x(d.year);})
-	.attr("cy", function(d,i){ return y(d.recordsLost);})
-	.attr("r", 4);
+	.selectAll("path").data(data)
+	.enter().append("path")
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.date) })
+        .y(function(d) { return y(d.dead) })
+        )
 
 d3.select("svg").append("g")
 	.attr("transform","translate("+margin+","+margin+")")
