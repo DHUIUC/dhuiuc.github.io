@@ -93,7 +93,7 @@ body {font-family: "Lato", sans-serif}
 <script>
 async function init() {
 <!-- CODE GOES HERE -->
-const parseDate = d3.timeParse("%Y-%m-%d");
+const parseDate = d3.timeParse("%m/%d/%Y");
 
 const data = await d3.csv("https://raw.githubusercontent.com/DHUIUC/dhuiuc.github.io/main/Mass_Shooting_Data_Simplified.csv", function(d){
 	return {
