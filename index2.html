@@ -159,10 +159,15 @@ svg.append("path")
         .y(function(d) { return y2(d.injured) })
         );
 		
+<!-- CODE ENDS HERE-->
+}
+</script>
+<script>
+//outside of async init
 d3.select('body')
-.append('div')
-.attr('id', 'tooltip')
-.attr('style', 'position: absolute; opacity: 0;');
+	.append('div')
+	.attr('id', 'tooltip')
+	.attr('style', 'position: absolute; opacity: 0;');
 
 d3.select('svg').selectAll('circle').data(data)
 	.join('circle')
@@ -178,11 +183,7 @@ d3.select('svg').selectAll('circle').data(data)
 		.style('left', (d3.event.pageX+10) + 'px')
 		.style('top', (d3.event.pageY+10) + 'px');
 	});
-
-<!-- CODE ENDS HERE-->
-}
-</script>
-
+</script
 <!-- W3 Scripts -->
 <script>
 
