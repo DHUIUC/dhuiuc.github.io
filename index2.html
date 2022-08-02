@@ -95,35 +95,13 @@ async function init() {
 <!-- CODE GOES HERE -->
 const parseDate = d3.timeParse("%Y-%m-%d");
 
-const data = await d3.csv("https://raw.githubusercontent.com/DHUIUC/dhuiuc.github.io/main/History_of_Mass_Shootings_in_the_USA.csv", function(d){
+const data = await d3.csv("Mass_Shooting_Data_Simplified.csv", function(d){
 	return {
 		date: parseDate(d.Date),
-		city: d.City,
-		state: d.State,
 		dead: d.Dead,
 		injured: d.Injured,
-		total: d.Total,
-		description : d.Description
 	};
 });
-
-var binnedDead = d3.nest()
-  .key((d) -> d3.time.week(d.date))
-  .rollup((a) -> d3.sum(a, (d) -> d.dead))
-  .entries(data);
-  
-console.log(binnedDead);
-
-var binnedInjured = d3.nest()
-  .key((d) -> d3.time.week(d.date))
-  .rollup((a) -> d3.sum(a, (d) -> d.injured))
-  .entries(data);
-  
-console.log(binnedInjured);
-
-// Optional
-//nested_data.map (d) ->
-//  d.date = new Date(d.key)
 
 
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
