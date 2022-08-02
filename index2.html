@@ -130,15 +130,18 @@ var x = d3.scaleTime().domain([d3.min(data, function(d) { return d.date; }),
 var y = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.dead; })])
 						 .range([ height, 0 ]);
 	  
-
+//This is only for the number of injured
+var y2 = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.injured; })])
+						 .range([ height, 0 ]);
 
 
 svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
 
+//because y2 is higher
 svg.append("g")
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(y2));
 
 svg.append("path")
 	  .datum(data)
@@ -149,6 +152,17 @@ svg.append("path")
       .attr("d", d3.line()
         .x(function(d) { return x(d.date) })
         .y(function(d) { return y(d.dead) })
+        );
+		
+svg.append("path")
+	  .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "orange")
+      .attr("stroke-width", 1.5)
+	  .attr("stroke-linejoin", "round")
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.date) })
+        .y(function(d) { return y2(d.injured) })
         );
 
 <!-- CODE ENDS HERE-->
