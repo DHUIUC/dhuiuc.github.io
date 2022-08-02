@@ -107,7 +107,24 @@ const data = await d3.csv("https://raw.githubusercontent.com/DHUIUC/dhuiuc.githu
 	};
 });
 
-console.log(data);
+var binnedDead = d3.nest()
+  .key((d) -> d3.time.week(d.date))
+  .rollup((a) -> d3.sum(a, (d) -> d.dead))
+  .entries(data);
+  
+console.log(binnedDead);
+
+var binnedInjured = d3.nest()
+  .key((d) -> d3.time.week(d.date))
+  .rollup((a) -> d3.sum(a, (d) -> d.injured))
+  .entries(data);
+  
+console.log(binnedInjured);
+
+// Optional
+//nested_data.map (d) ->
+//  d.date = new Date(d.key)
+
 
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
     width = 1200 - margin.left - margin.right,
