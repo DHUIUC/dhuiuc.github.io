@@ -158,13 +158,13 @@ svg.append("path")
         .x(function(d) { return x(d.date) })
         .y(function(d) { return y2(d.injured) })
         );
-		
+
+tooltip(data);
 <!-- CODE ENDS HERE-->
 }
-</script>
-<script>
-//outside of async init
-d3.select('body')
+
+function tooltip(data){
+	d3.select('body')
 	.append('div')
 	.attr('id', 'tooltip')
 	.attr('style', 'position: absolute; opacity: 0;');
@@ -183,7 +183,9 @@ d3.select('svg').selectAll('circle').data(data)
 		.style('left', (d3.event.pageX+10) + 'px')
 		.style('top', (d3.event.pageY+10) + 'px');
 	});
-</script
+}
+</script>
+
 <!-- W3 Scripts -->
 <script>
 
