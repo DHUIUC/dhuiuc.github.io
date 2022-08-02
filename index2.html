@@ -95,7 +95,7 @@ async function init() {
 <!-- CODE GOES HERE -->
 const parseDate = d3.timeParse("%Y-%m-%d");
 
-const data = await d3.csv("Mass_Shooting_Data_Simplified.csv", function(d){
+const data = await d3.csv("https://raw.githubusercontent.com/DHUIUC/dhuiuc.github.io/main/Mass_Shooting_Data_Simplified.csv", function(d){
 	return {
 		date: parseDate(d.Date),
 		dead: d.Dead,
@@ -103,6 +103,7 @@ const data = await d3.csv("Mass_Shooting_Data_Simplified.csv", function(d){
 	};
 });
 
+console.log(data);
 
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
     width = 1200 - margin.left - margin.right,
@@ -113,8 +114,6 @@ var svg = d3.select("svg")
 	.attr("height",height + margin.top + margin.bottom)
 	.append("g")
 	.attr("transform","translate("+margin.left+","+margin.top+")");
-
-
 
 
 var x = d3.scaleTime().domain([d3.min(data, function(d) { return d.date; }),
