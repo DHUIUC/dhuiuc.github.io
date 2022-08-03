@@ -153,7 +153,7 @@ function bubbleChart() {
     // use map() to convert raw data into node data
     const myNodes = rawData.map(d => ({
       ...d,
-      radius: (radiusScale(+d.occurrences) + 1),
+      radius: (radiusScale((+d.rate)*50) + 1),
       size: +d.occurrences,
 	  color: +d.legislation,
       x: Math.random() * 900,
