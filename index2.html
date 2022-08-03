@@ -5,11 +5,60 @@
 <title>Mass Shootings in the United States</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-circle {fill: lightblue; stroke: black;}
+circle {stroke: black;}
+	
+body{
+	font-family: "Lato", sans-serif;
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+
+	
+h2{
+	font-family: "Segoe UI",Arial,sans-serif;
+	font-weight: 400;
+	margin: 10px;
+	font-size: 30px;
+	text-align: center!important;
+}
+
+.canvas{
+	display: flex; 
+	justify-content: center;
+}
+
+.box{
+	border: 5px solid #FFFF00;
+}
+
+.float-container {
+    padding: 20px;
+}
+
+.float-child {
+    width: 50%;
+    float: left;
+    padding: 20px;
+}  
+
+.btn {
+  background-color: #4CAF50; /* Green */
+  border: 3px solid #fff;  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.txt{
+	max-width:800px;
+	text-align: center!important;
+	margin-left: auto;
+	margin-right: auto;
+}
 	
 div.tooltip {	
     position: absolute;			
@@ -24,188 +73,184 @@ div.tooltip {
     pointer-events: none;			
 }
 
-body {font-family: "Lato", sans-serif}
-.mySlides {display: none}
+
 </style>
 </head>
-<body onload='init()'>
-
-<!-- Navbar -->
-<div class="w3-top">
-  <div class="w3-bar w3-black w3-card">
-  </div>
-</div>
-
-<!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
-<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-</div>
+<body>
 
 <!-- Page content -->
-<div class="w3-content" style="max-width:2000px;margin-top:46px">
+<div style="max-width:2000px;margin-top:46px">
 
-  <!-- The Band Section -->
-  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
-    <h2 class="w3-wide">Fuel Efficiency</h2>
-    <p class="w3-opacity"><i>Is your car as efficient as you thought?</i></p>
-    <p class="w3-justify">Cars are the driving force or the economy (no pun intended), as they allow us to travel to work, buy necesary items, and see our loved ones.
-	However, your car could be burning a major hole in your pocket. Below is a graph of fuel efficiency of many different car makes, with the size of each item on the graph
-	representing the cylinder size of each car. How do you stack up?</p>
+    <h2 >THE BAND</h2>
+    <p class="txt">We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+      ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
+      adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     
 	<!-- SVG GOES HERE -->
-	<svg width=600 height=600>
-	</svg>
-  </div>
-
- 
-
-  <!-- Ticket Modal -->
-  <div id="ticketModal" class="w3-modal">
-    <div class="w3-modal-content w3-animate-top w3-card-4">
-      <header class="w3-container w3-teal w3-center w3-padding-32"> 
-        <span onclick="document.getElementById('ticketModal').style.display='none'" 
-       class="w3-button w3-teal w3-xlarge w3-display-topright">×</span>
-        <h2 class="w3-wide"><i class="fa fa-suitcase w3-margin-right"></i>Tickets</h2>
-      </header>
-      <div class="w3-container">
-        <p><label><i class="fa fa-shopping-cart"></i> Tickets, $15 per person</label></p>
-        <input class="w3-input w3-border" type="text" placeholder="How many?">
-        <p><label><i class="fa fa-user"></i> Send To</label></p>
-        <input class="w3-input w3-border" type="text" placeholder="Enter email">
-        <button class="w3-button w3-block w3-teal w3-padding-16 w3-section w3-right">PAY <i class="fa fa-check"></i></button>
-        <button class="w3-button w3-red w3-section" onclick="document.getElementById('ticketModal').style.display='none'">Close <i class="fa fa-remove"></i></button>
-        <p class="w3-right">Need <a href="#" class="w3-text-blue">help?</a></p>
-      </div>
-    </div>
+	<div id = 'svg' class="canvas"></div>
   </div>
   
-  <a class="w3-button w3-dark-grey" href="/index3.html">Next &nbsp;<i class="fa fa-arrow-right"></i></a>
-  <a class="w3-button w3-dark-grey" href="/index.html">Prev &nbsp;<i class="fa fa-arrow-right"></i></a>
-
+  <div class="float-container">
+	  <a class="btn" href="/index3.html">Next &nbsp;</a>
+	  <a class="btn" href="/index1.html">Prev &nbsp;</a>
+  </div>
 <!-- End Page Content -->
 </div>
 
-<!-- Footer -->
-<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
-  <p class="w3-medium">Templated based on: <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer>
-
 
 <script>
-async function init() {
-<!-- CODE GOES HERE -->
-const parseDate = d3.timeParse("%m/%d/%Y");
 
-const data = await d3.csv("https://raw.githubusercontent.com/DHUIUC/dhuiuc.github.io/main/Mass_Shooting_Data_Simplified.csv", function(d){
-	return {
-		date: parseDate(d.Date),
-		dead: d.Dead,
-		injured: d.Injured,
-	};
-});
+// bubbleChart creation function; instantiate new bubble chart given a DOM element to display it in and a dataset to visualise
+function bubbleChart() {
+  const width = 800;
+  const height = 700;
 
+  // location to centre the bubbles
+  const centre = { x: width/2, y: height/2 };
+
+  // strength to apply to the position forces
+  const forceStrength = 0.03;
+
+  // these will be set in createNodes and chart functions
+  let svg = null;
+  let bubbles = null;
+  let labels = null;
+  let nodes = [];
+
+  // charge is dependent on size of the bubble, so bigger towards the middle
+  function charge(d) {
+    return Math.pow(d.radius, 2.0) * 0.01
+  }
+
+  // create a force simulation and add forces to it
+  const simulation = d3.forceSimulation()
+    .force('charge', d3.forceManyBody().strength(charge))
+    // .force('center', d3.forceCenter(centre.x, centre.y))
+    .force('x', d3.forceX().strength(forceStrength).x(centre.x))
+    .force('y', d3.forceY().strength(forceStrength).y(centre.y))
+    .force('collision', d3.forceCollide().radius(d => d.radius + 1));
+
+  // force simulation starts up automatically, which we don't want as there aren't any nodes yet
+  simulation.stop();
+
+  // set up colour scale
+
+
+  // data manipulation function takes raw data from csv and converts it into an array of node objects
+  // each node will store data and visualisation values to draw a bubble
+  // rawData is expected to be an array of data objects, read in d3.csv
+  // function returns the new node array, with a node for each element in the rawData input
+  function createNodes(rawData) {
+    // use max size in the data as the max in the scale's domain
+    // note we have to ensure that size is a number
+    const maxSize = d3.max(rawData, d => +d.occurrences);
+
+    // size bubbles based on area
+    const radiusScale = d3.scaleSqrt()
+      .domain([0, maxSize])
+      .range([0, 80])
+
+    // use map() to convert raw data into node data
+    const myNodes = rawData.map(d => ({
+      ...d,
+      radius: (radiusScale(+d.occurrences) + 1),
+      size: +d.occurrences,
+	  color: (d.dead + d.injured),
+      x: Math.random() * 900,
+      y: Math.random() * 800
+    }))
+
+    return myNodes;
+  }
+
+  // main entry point to bubble chart, returned by parent closure
+  // prepares rawData for visualisation and adds an svg element to the provided selector and starts the visualisation process
+  let chart = function chart(selector, rawData) {
+    // convert raw data into nodes data
+    nodes = createNodes(rawData);
+	
+	console.log("nodes");
+	console.log(nodes);
+
+    // create svg element inside provided selector
+    svg = d3.select(selector)
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height)
+
+    // bind nodes data to circle elements
+    const elements = svg.selectAll('.bubble')
+      .data(nodes, d => d.state)
+      .enter()
+      .append('g')
+
+	const fillColour = d3.scaleLinear()
+		.domain([0,(d3.max(nodes, d => d.color))])
+		.range(["white", "red"]);
+	
+	console.log((d3.max(nodes, d => d.color)));
+
+    bubbles = elements
+      .append('circle')
+      .attr('r', d => d.radius)
+      .attr('fill', function(d){ return fillColour(d.color);});
+
+    // labels
+    labels = elements
+      .append('text')
+      .attr('dy', '.3em')
+      .style('text-anchor', 'middle')
+      .style('font-size', 10)
+      .text(d => d.state)
+
+    // set simulation's nodes to our newly created nodes array
+    // simulation starts running automatically once nodes are set
+    simulation.nodes(nodes)
+      .on('tick', ticked)
+      .restart();
+  }
+
+  // callback function called after every tick of the force simulation
+  // here we do the actual repositioning of the circles based on current x and y value of their bound node data
+  // x and y values are modified by the force simulation
+  function ticked() {
+    bubbles
+      .attr('cx', d => d.x)
+      .attr('cy', d => d.y)
+
+    labels
+      .attr('x', d => d.x)
+      .attr('y', d => d.y)
+  }
+
+  // return chart function from closure
+  return chart;
+}
+
+// new bubble chart instance
+let myBubbleChart = bubbleChart();
+
+// function called once promise is resolved and data is loaded from csv
+// calls bubble chart function to display inside #vis div
+function display(data) {
 console.log(data);
+  myBubbleChart('#svg', data);
+}
 
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 1200 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
-
-var svg = d3.select("svg")
-	.attr("width",width + margin.left + margin.right)
-	.attr("height",height + margin.top + margin.bottom)
-	.append("g")
-	.attr("transform","translate("+margin.left+","+margin.top+")");
-
-
-var x = d3.scaleTime().domain([d3.min(data, function(d) { return d.date; }),
-							   d3.max(data, function(d) { return d.date; })])
-					  .range([ 0, width ]);
-
-//This is only for the number of deaths			  
-var y = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.dead; })])
-						 .range([ height, 0 ]);
-	  
-//This is only for the number of injured
-var y2 = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.injured; })])
-						 .range([ height, 0 ]);
-
-
-svg.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
-
-//because y2 is higher
-svg.append("g")
-      .call(d3.axisLeft(y2));
-
-svg.append("path")
-	  .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-	  .attr("stroke-linejoin", "round")
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.date) })
-        .y(function(d) { return y(d.dead) })
-        );
-		
-svg.append("path")
-	  .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "orange")
-      .attr("stroke-width", 1.5)
-	  .attr("stroke-linejoin", "round")
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.date) })
-        .y(function(d) { return y2(d.injured) })
-        );
-
+// load data
+d3.csv('https://raw.githubusercontent.com/DHUIUC/dhuiuc.github.io/main/Mass_Shooting_State_Data.csv',function(d){
+	return {
+		state : d.State,
+		dead : d.Dead,
+		injured: d.Injured,
+		occurrences : d.Occurrences,
+		population : d.Population,
+		rate : d.Rate,
+		legislation : d.Legislation
+	};
+}).then(display);
 
 <!-- CODE ENDS HERE-->
-}
-
-function tooltip(data){
-	d3.select('body')
-	.append('div')
-	.attr('id', 'tooltip')
-	.attr('style', 'position: absolute; opacity: 0;');
-
-d3.select('svg').selectAll('circle').data(data)
-	.join('circle')
-	.attr('r', 3)
-	.on('mouseover', function(d) {
-		d3.select('#tooltip').transition().duration(200).style('opacity', 1).text(d.dead)
-	})
-	.on('mouseout', function(d) {
-		d3.select('#tooltip').style('opacity', 0);
-	})
-	.on('mousemove', function() {
-		d3.select('#tooltip')
-		.style('left', (d3.event.pageX+10) + 'px')
-		.style('top', (d3.event.pageY+10) + 'px');
-	});
-}
-</script>
-
-<!-- W3 Scripts -->
-<script>
-
-// Used to toggle the menu on small screens when clicking on the menu button
-function myFunction() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-
-// When the user clicks anywhere outside of the modal, close it
-var modal = document.getElementById('ticketModal');
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
 </script>
 
 </body>
