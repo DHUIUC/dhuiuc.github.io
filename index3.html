@@ -155,7 +155,7 @@ function bubbleChart() {
       ...d,
       radius: (radiusScale(+d.occurrences) + 1),
       size: +d.occurrences,
-	  color: (d.dead + d.injured),
+	  color: +d.legislation,
       x: Math.random() * 900,
       y: Math.random() * 800
     }))
@@ -186,7 +186,7 @@ function bubbleChart() {
 
 	const fillColour = d3.scaleLinear()
 		.domain([0,(d3.max(nodes, d => d.color))])
-		.range(["white", "red"]);
+		.range(["ghostwhite", "chocolate"]);
 	
 	console.log((d3.max(nodes, d => d.color)));
 
