@@ -52,8 +52,7 @@ body {font-family: "Lato", sans-serif}
       adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     
 	<!-- SVG GOES HERE -->
-	<svg width=600 height=600>
-	</svg>
+	<div id = 'svg'></div>
   </div>
 
  
@@ -88,32 +87,28 @@ body {font-family: "Lato", sans-serif}
 
 
 <script>
-async function init() {
-<!-- CODE GOES HERE -->
-const data = await d3.csv("https://flunky.github.io/cars2017.csv", function(d){
-	return {
-		make: d.Make,
-		fuel: d.Fuel,
-		engineCylinders: d.EngineCylinders,
-		averageHighwayMPG: d.AverageHighwayMPG,
-		averageCityMPG: d.AverageCityMPG
-	};
-});
 
-var hxw = 600
+// bubbleChart creation function; instantiate new bubble chart given a DOM element to display it in and a dataset to visualise
+function bubbleChart() {
+  const width = 800;
+  const height = 500;
 
-//BUBBLE CODE START
+  // location to centre the bubbles
+  const centre = { x: width/2, y: height/2 };
 
-  const centre = { x: hxw/2, y: hxw/2 };
-
+  // strength to apply to the position forces
   const forceStrength = 0.03;
-  
+
+  // these will be set in createNodes and chart functions
   let svg = null;
   let bubbles = null;
   let labels = null;
   let nodes = [];
 
-
+  // charge is dependent on size of the bubble, so bigger towards the middle
+  function charge(d) {
+    return Math.pow(d.radius, 2.0) * 0.01
+  }
 
   // create a force simulation and add forces to it
   const simulation = d3.forceSimulation()
@@ -126,21 +121,17 @@ var hxw = 600
   // force simulation starts up automatically, which we don't want as there aren't any nodes yet
   simulation.stop();
 
-  const fillColour = d3.scaleOrdinal()
-  	.domain(["1", "2", "3", "5", "99"])
-  	.range(["gold", "blue", "green", "yellow", "black", "grey", "darkgreen", "pink", "brown", "slateblue", "grey1", "orange"]);
+  // set up colour scale
 
-//BUBBLE CODE STOP
 
-  // charge is dependent on size of the bubble, so bigger towards the middle
-  function charge(d) {
-    return Math.pow(d.radius, 2.0) * 0.01
-  }
-
-function createNodes(rawData) {
+  // data manipulation function takes raw data from csv and converts it into an array of node objects
+  // each node will store data and visualisation values to draw a bubble
+  // rawData is expected to be an array of data objects, read in d3.csv
+  // function returns the new node array, with a node for each element in the rawData input
+  function createNodes(rawData) {
     // use max size in the data as the max in the scale's domain
     // note we have to ensure that size is a number
-    const maxSize = d3.max(rawData, d => +d.size);
+    const maxSize = d3.max(rawData, d => +d.occurrences);
 
     // size bubbles based on area
     const radiusScale = d3.scaleSqrt()
@@ -150,8 +141,8 @@ function createNodes(rawData) {
     // use map() to convert raw data into node data
     const myNodes = rawData.map(d => ({
       ...d,
-      radius: radiusScale(+d.size),
-      size: +d.size,
+      radius: radiusScale(+d.occurrences),
+      size: +d.occurrences,
       x: Math.random() * 900,
       y: Math.random() * 800
     }))
@@ -159,50 +150,78 @@ function createNodes(rawData) {
     return myNodes;
   }
 
-//bubble funcs
+  // main entry point to bubble chart, returned by parent closure
+  // prepares rawData for visualisation and adds an svg element to the provided selector and starts the visualisation process
+  let chart = function chart(selector, rawData) {
+    // convert raw data into nodes data
+    nodes = createNodes(rawData);
 
+    // create svg element inside provided selector
+    svg = d3.select(selector)
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height)
 
+    // bind nodes data to circle elements
+    const elements = svg.selectAll('.bubble')
+      .data(nodes, d => d.state)
+      .enter()
+      .append('g')
 
+	const fillColour = d3.scaleQuantize()
+		.domain([0,(d3.max(data, function(d) { return +d.dead;} + d3.max(data, function(d) { return +d.injured;} )])
+		.range(["#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598", 
+		"#FFFFBF", "#FEE08B", "#FDAE61", "#F46D43", "#D53E4F", "#9E0142"]);
 
-var x = d3.scaleLog().domain([10,150]).range([0,hxw]);
-var y = d3.scaleLog().domain([10,150]).range([hxw,0]);
+    bubbles = elements
+      .append('circle')
+      .classed('bubble', true)
+      .attr('r', d => d.occurrences)
+      .attr('fill', d => fillColour((d.dead + d.injured)))
 
-var tooltip = d3.select("body").append("div")	
-    .attr("class", "tooltip")				
-	.style("opacity", 0);
+    // labels
+    labels = elements
+      .append('text')
+      .attr('dy', '.3em')
+      .style('text-anchor', 'middle')
+      .style('font-size', 10)
+      .text(d => d.state)
 
-d3.select("svg")
-	.attr("width",hxw)
-	.attr("height",hxw)
-	.append("g")
-	.attr("transform","translate("+margin+","+margin+")")
-	.selectAll("circle").data(data)
-	.enter().append("circle")
-	.attr("cx", function(d,i){ return x(d.averageCityMPG);})
-	.attr("cy", function(d,i){ return y(d.averageHighwayMPG);})
-	.attr("r",function(d,i){ return +d.engineCylinders + 2;})
-	.on("mouseover", function(){ tooltip.opacity=1;})
-	.on("mouseover", function(){ tooltip.style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px");})
-	.on("mouseover", function(d){ tooltip.text(d.make);});
+    // set simulation's nodes to our newly created nodes array
+    // simulation starts running automatically once nodes are set
+    simulation.nodes(nodes)
+      .on('tick', ticked)
+      .restart();
+  }
 
-d3.select("svg").append("g")
-	.attr("transform","translate("+margin+","+margin+")")
-	.call(d3.axisLeft(y).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")))
-	.append("text")
-    .attr("fill", "black")
-    .attr("transform","translate("+0+","+(hxw/2)+")")
-    .text("Highway MPG");
-	
-d3.select("svg").append("g")
-	.attr("transform","translate("+margin+","+(hxw+margin)+")")
-	.call(d3.axisBottom(x).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")))
-	.append("text")
-    .attr("fill", "black")
-    .attr("transform","translate("+(hxw/2)+","+margin+")")
-    .text("City MPG");
-	
+  // callback function called after every tick of the force simulation
+  // here we do the actual repositioning of the circles based on current x and y value of their bound node data
+  // x and y values are modified by the force simulation
+  function ticked() {
+    bubbles
+      .attr('cx', d => d.x)
+      .attr('cy', d => d.y)
 
+    labels
+      .attr('x', d => d.x)
+      .attr('y', d => d.y)
+  }
 
+  // return chart function from closure
+  return chart;
+}
+
+// new bubble chart instance
+let myBubbleChart = bubbleChart();
+
+// function called once promise is resolved and data is loaded from csv
+// calls bubble chart function to display inside #vis div
+function display(data) {
+  myBubbleChart('#svg', data);
+}
+
+// load data
+d3.csv('Mass_Shooting_State_Data').then(display);
 
 <!-- CODE ENDS HERE-->
 }
