@@ -169,7 +169,7 @@ function bubbleChart() {
       .append('g')
 
 	const fillColour = d3.scaleQuantize()
-		.domain([0,(d3.max(data, function(d) { return +d.dead;}) + d3.max(data, function(d) { return +d.injured;} ))])
+		.domain([0,(d3.max(rawData, function(d) { return +d.dead;}) + d3.max(rawData, function(d) { return +d.injured;} ))])
 		.range(["#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598", 
 		"#FFFFBF", "#FEE08B", "#FDAE61", "#F46D43", "#D53E4F", "#9E0142"]);
 
