@@ -43,7 +43,7 @@ h2{
     padding: 20px;
 }  
 
-.a {
+.btn {
   background-color: #4CAF50; /* Green */
   border: 3px solid #fff;  color: white;
   padding: 15px 32px;
@@ -75,7 +75,7 @@ div.tooltip {
 <div style="max-width:2000px;margin-top:46px">
 
     <h2 >THE BAND</h2>
-    <p>We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+    <p style="max-width:800px">We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
       ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
       adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     
@@ -84,8 +84,8 @@ div.tooltip {
   </div>
   
   <div class="float-container">
-	  <a href="/index3.html">Next &nbsp;</a>
-	  <a href="/index1.html">Prev &nbsp;</a>
+	  <a class="btn" href="/index3.html">Next &nbsp;</a>
+	  <a class="btn" href="/index1.html">Prev &nbsp;</a>
   </div>
 <!-- End Page Content -->
 </div>
@@ -181,7 +181,7 @@ function bubbleChart() {
 		.domain([0,(d3.max(nodes, d => d.color))])
 		.range(["white", "red"]);
 	
-	console.log(fillColour)
+	console.log(function(d){ return fillColour(d.color);})
 
     bubbles = elements
       .append('circle')
