@@ -155,7 +155,7 @@ function bubbleChart() {
       ...d,
       radius: (radiusScale(+d.occurrences) + 1),
       size: +d.occurrences,
-	  color: (d.dead + d.injured),
+	  color: (+d.dead + (+d.injured)),
       x: Math.random() * 900,
       y: Math.random() * 800
     }))
