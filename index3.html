@@ -143,6 +143,7 @@ function bubbleChart() {
       ...d,
       radius: radiusScale(+d.occurrences),
       size: +d.occurrences,
+	  color: (d.dead + d.injured),
       x: Math.random() * 900,
       y: Math.random() * 800
     }))
@@ -176,8 +177,8 @@ function bubbleChart() {
     bubbles = elements
       .append('circle')
       .classed('bubble', true)
-      .attr('r', d => d.occurrences)
-      .attr('fill', d => fillColour((d.dead + d.injured)))
+      .attr('r', d => d.size)
+      .attr('fill', d => fillColour(d.color))
 
     // labels
     labels = elements
