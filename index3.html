@@ -52,6 +52,11 @@ h2{
   display: inline-block;
   font-size: 16px;
 }
+
+.txt{
+	max-width:800px;
+	text-align: center!important;
+}
 	
 div.tooltip {	
     position: absolute;			
@@ -75,7 +80,7 @@ div.tooltip {
 <div style="max-width:2000px;margin-top:46px">
 
     <h2 >THE BAND</h2>
-    <p style="max-width:800px">We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+    <p class="txt">We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
       ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
       adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     
@@ -181,7 +186,7 @@ function bubbleChart() {
 		.domain([0,(d3.max(nodes, d => d.color))])
 		.range(["white", "red"]);
 	
-	console.log(function(d){ return fillColour(d.color);})
+	console.log((d3.max(nodes, d => d.color)));
 
     bubbles = elements
       .append('circle')
