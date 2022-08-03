@@ -28,7 +28,7 @@ body {font-family: "Lato", sans-serif}
 .mySlides {display: none}
 </style>
 </head>
-<body onload='init()'>
+<body>
 
 <!-- Navbar -->
 <div class="w3-top">
@@ -221,7 +221,7 @@ function display(data) {
 }
 
 // load data
-d3.csv('Mass_Shooting_State_Data').then(display);
+d3.csv('https://raw.githubusercontent.com/DHUIUC/dhuiuc.github.io/main/Mass_Shooting_State_Data.csv').then(display);
 
 <!-- CODE ENDS HERE-->
 </script>
