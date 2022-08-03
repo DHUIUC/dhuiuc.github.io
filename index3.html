@@ -91,7 +91,7 @@ body {font-family: "Lato", sans-serif}
 // bubbleChart creation function; instantiate new bubble chart given a DOM element to display it in and a dataset to visualise
 function bubbleChart() {
   const width = 800;
-  const height = 500;
+  const height = 800;
 
   // location to centre the bubbles
   const centre = { x: width/2, y: height/2 };
@@ -141,7 +141,7 @@ function bubbleChart() {
     // use map() to convert raw data into node data
     const myNodes = rawData.map(d => ({
       ...d,
-      radius: radiusScale(+d.occurrences),
+      radius: (radiusScale(+d.occurrences) + 1),
       size: +d.occurrences,
 	  color: (d.dead + d.injured),
       x: Math.random() * 900,
@@ -172,10 +172,9 @@ function bubbleChart() {
       .enter()
       .append('g')
 
-	const fillColour = d3.scaleQuantize()
+	const fillColour = d3.scaleLinear()
 		.domain([0,(d3.max(rawData, function(d) { return +d.dead;}) + d3.max(rawData, function(d) { return +d.injured;} ))])
-		.range(["#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598", 
-		"#FFFFBF", "#FEE08B", "#FDAE61", "#F46D43", "#D53E4F", "#9E0142"]);
+		.range(["white", "red"]);
 
     bubbles = elements
       .append('circle')
