@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <script src='https://d3js.org/d3.v5.min.js'></script>
-<title>Car Fuel Efficiency Data Visualization</title>
+<title>Mass Shootings in the United States</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -25,12 +25,24 @@ h2{
 }
 
 .canvas{
-	margin-left: auto;
-	margin-right: auto;
+	display: flex; 
+	justify-content: center;
 }
 
 .box{
 	border: 5px solid #FFFF00;
+	float: right;
+	background-color: "ghostwhite"; 
+	height: 400px;
+	width: 400px;
+}
+
+.tooltip{
+	font: 12px sans-serif;		
+	position: absolute;			
+    text-align: center;	
+	font-size: 18px;
+	line-height: 1.5;
 }
 
 .float-container {
@@ -87,10 +99,14 @@ div.tooltip {
       adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     
 	<!-- SVG GOES HERE -->
-	<svg class="canvas">
-	</svg>
-  </div>
-  
+	<div class="canvas">
+		<svg></svg>
+		<div class="box">
+			<tooltip class="tooltip"></tooltip>
+		</div>
+		
+	</div>
+	
   <div class="float-container">
 	  <a class="btn" href="/index2.html">Next &nbsp;</a>
   </div>
