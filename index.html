@@ -25,8 +25,8 @@ h2{
 }
 
 .canvas{
-	display: flex; 
-	justify-content: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .box{
@@ -101,60 +101,99 @@ div.tooltip {
 <script>
 async function init() {
 <!-- CODE GOES HERE -->
-const data = await d3.csv("https://flunky.github.io/cars2017.csv", function(d){
+const parseDate = d3.timeParse("%m/%d/%Y");
+
+const data = await d3.csv("https://raw.githubusercontent.com/DHUIUC/dhuiuc.github.io/main/Mass_Shooting_Data_Simplified.csv", function(d){
 	return {
-		make: d.Make,
-		fuel: d.Fuel,
-		engineCylinders: d.EngineCylinders,
-		averageHighwayMPG: d.AverageHighwayMPG,
-		averageCityMPG: d.AverageCityMPG
+		date: parseDate(d.Date),
+		dead: d.Dead,
+		injured: d.Injured,
 	};
 });
 
-var margin = 50
-var hxw = 600
+console.log(data);
 
-var x = d3.scaleLog().domain([10,150]).range([0,hxw]);
-var y = d3.scaleLog().domain([10,150]).range([hxw,0]);
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 1200 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
 
-var tooltip = d3.select("svg").append("div")
-    .attr("class", "tooltip")				
-	.style("opacity", 0);
-
-d3.select("svg")
-	.attr("width",hxw + 2*margin)
-	.attr("height",hxw + 2*margin)
+var svg = d3.select("svg")
+	.attr("width",width + margin.left + margin.right)
+	.attr("height",height + margin.top + margin.bottom)
 	.append("g")
-	.attr("transform","translate("+margin+","+margin+")")
-	.selectAll("circle").data(data)
-	.enter().append("circle")
-	.attr("cx", function(d,i){ return x(d.averageCityMPG);})
-	.attr("cy", function(d,i){ return y(d.averageHighwayMPG);})
-	.attr("r",function(d,i){ return +d.engineCylinders + 2;})
-	.on("mouseover", function(d){ tooltip.style("opacity",1);})
-	.on("mouseover", function(d){ tooltip.style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px");})
-	.on("mouseover", function(d){ tooltip.text(d.make);});
+	.attr("transform","translate("+margin.left+","+margin.top+")");
 
-d3.select("svg").append("g")
-	.attr("transform","translate("+margin+","+margin+")")
-	.call(d3.axisLeft(y).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")))
-	.append("text")
-    .attr("fill", "black")
-    .attr("transform","translate("+0+","+(hxw/2)+")")
-    .text("Highway MPG");
-	
-d3.select("svg").append("g")
-	.attr("transform","translate("+margin+","+(hxw+margin)+")")
-	.call(d3.axisBottom(x).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")))
-	.append("text")
-    .attr("fill", "black")
-    .attr("transform","translate("+(hxw/2)+","+margin+")")
-    .text("City MPG");
-	
+
+var x = d3.scaleTime().domain([d3.min(data, function(d) { return d.date; }),
+							   d3.max(data, function(d) { return d.date; })])
+					  .range([ 0, width ]);
+
+//This is only for the number of deaths			  
+var y = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.dead; })])
+						 .range([ height, 0 ]);
+	  
+//This is only for the number of injured
+var y2 = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.injured; })])
+						 .range([ height, 0 ]);
+
+
+svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+//because y2 is higher
+svg.append("g")
+      .call(d3.axisLeft(y2));
+
+svg.append("path")
+	  .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+	  .attr("stroke-linejoin", "round")
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.date) })
+        .y(function(d) { return y(d.dead) })
+        );
+		
+svg.append("path")
+	  .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "orange")
+      .attr("stroke-width", 1.5)
+	  .attr("stroke-linejoin", "round")
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.date) })
+        .y(function(d) { return y2(d.injured) })
+        );
+
 
 <!-- CODE ENDS HERE-->
 }
+
+function tooltip(data){
+	d3.select('body')
+	.append('div')
+	.attr('id', 'tooltip')
+	.attr('style', 'position: absolute; opacity: 0;');
+
+d3.select('svg').selectAll('circle').data(data)
+	.join('circle')
+	.attr('r', 3)
+	.on('mouseover', function(d) {
+		d3.select('#tooltip').transition().duration(200).style('opacity', 1).text(d.dead)
+	})
+	.on('mouseout', function(d) {
+		d3.select('#tooltip').style('opacity', 0);
+	})
+	.on('mousemove', function() {
+		d3.select('#tooltip')
+		.style('left', (d3.event.pageX+10) + 'px')
+		.style('top', (d3.event.pageY+10) + 'px');
+	});
+}
 </script>
+
 
 </body>
 </html>
