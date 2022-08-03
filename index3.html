@@ -56,6 +56,8 @@ h2{
 .txt{
 	max-width:800px;
 	text-align: center!important;
+	margin-left: auto;
+	margin-right: auto;
 }
 	
 div.tooltip {	
@@ -101,7 +103,7 @@ div.tooltip {
 // bubbleChart creation function; instantiate new bubble chart given a DOM element to display it in and a dataset to visualise
 function bubbleChart() {
   const width = 800;
-  const height = 800;
+  const height = 700;
 
   // location to centre the bubbles
   const centre = { x: width/2, y: height/2 };
@@ -190,7 +192,6 @@ function bubbleChart() {
 
     bubbles = elements
       .append('circle')
-      .classed('bubble', true)
       .attr('r', d => d.radius)
       .attr('fill', function(d){ return fillColour(d.color);});
 
