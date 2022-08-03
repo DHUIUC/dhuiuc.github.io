@@ -156,6 +156,9 @@ function bubbleChart() {
   let chart = function chart(selector, rawData) {
     // convert raw data into nodes data
     nodes = createNodes(rawData);
+	
+	console.log("nodes");
+	console.log(nodes);
 
     // create svg element inside provided selector
     svg = d3.select(selector)
@@ -177,7 +180,7 @@ function bubbleChart() {
     bubbles = elements
       .append('circle')
       .classed('bubble', true)
-      .attr('r', d => d.size)
+      .attr('r', d => d.radius)
       .attr('fill', d => fillColour(d.color))
 
     // labels
@@ -218,6 +221,7 @@ let myBubbleChart = bubbleChart();
 // function called once promise is resolved and data is loaded from csv
 // calls bubble chart function to display inside #vis div
 function display(data) {
+console.log(data);
   myBubbleChart('#svg', data);
 }
 
