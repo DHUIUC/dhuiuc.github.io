@@ -153,10 +153,13 @@ var x = d3.scaleTime().domain([d3.min(data, function(d) { return d.date; }),
 							   d3.max(data, function(d) { return d.date; })])
 					  .range([ 0, width ]);
 
+var scaleHeightY = (d3.max(data, function(d) { return +d.dead; }) / 
+					   d3.max(data, function(d) { return +d.injured; }) * 
+					   height);
+
 //This is only for the number of deaths			  
 var y = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.dead; })])
-						 .range([(d3.max(data, function(d) { return +d.dead; }) *
-						 height/d3.max(data, function(d) { return +d.injured; })), 0 ]);
+						 .range([scaleHeightY, 0 ]);
 	  
 //This is only for the number of injured
 var y2 = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.injured; })])
