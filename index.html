@@ -201,15 +201,20 @@ var mouseOverOrange = function(d){
 var mouseMoveOrange = function(d){
         
     tooltipBubble
-        .attr("cx", (d3.mouse(this)[0]+50) + "px")
+        .attr("cx", (d3.mouse(this)[0]+60) + "px")
         .attr("cy", (d3.mouse(this)[1]+15) + "px")
         
-    tooltip.html('<u>' + x.invert(d3.mouse(this)[0]) + '</u>' + '<br>' + '<span style="color:maroon">' + d.injured + '</span>')
+    tooltip.html('<u>' + formatDate(x.invert(d3.mouse(this)[0])) + '</u>' + '<br>' + '<span style="color:maroon">' + d.injured + '</span>')
 }
 var mouseLeaveOrange = function(d){
     tooltipBubble.style("opacity", 0)
     tooltip.style("opacity", 0)
     d3.select(this).style("stroke-opacity", 0.7);
+}
+
+var formatDate = function(date){
+	dt = [date.getDate(), date.getMonth()+1, date.getFullYear()];
+	return dt.join("/");
 }
 
 svg.append("g")
