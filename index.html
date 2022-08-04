@@ -102,7 +102,7 @@ div.tooltip {
 	<div class="canvas">
 		<svg></svg>
 		<div class="box">
-			<tooltip class="tooltip"></tooltip>
+			<div class="tooltip"></div>
 		</div>
 		
 	</div>
@@ -153,6 +153,65 @@ var y2 = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.injure
 						 .range([ height, 0 ]);
 
 
+var tooltipBubble = d3.select("svg").append("circle")
+    .attr("r",3)
+    .attr("cx",width/2)
+    .attr("cy",height/2)
+    .style("opacity", 0)
+    
+//var tooltipBubble = d3.select("circle");
+var tooltip = d3.select(".tooltip")
+    .append("div")
+    .style("opacity", 0)
+    
+//add text styling if needed
+//MOUSE EVENTS BLUE LINE
+var mouseOverBlue = function(d){
+    tooltipBubble
+        .style("opacity", 1)
+        .style("fill", "steelblue")
+        
+    tooltip.style("opacity", 1)
+    
+    d3.select(this).style("fill-opacity", 1);
+}
+var mouseMoveBlue = function(d){
+        
+    tooltipBubble
+        .style("left", (d3.mouse(this)[0] + 330) + "px")
+        .style("top", (d3.mouse(this)[1] + 200) + "px")
+        
+    tooltip.html('<u>' + d.date + '</u>' + '<br>' + '<span style="color:maroon">' + d.dead + '</span>')
+}
+var mouseLeaveBlue = function(d){
+    tooltipBubble.style("opacity", 0)
+    tooltip.style("opacity", 0)
+    d3.select(this).style("fill-opacity", 0.7);
+}
+//MOUSE EVENTS ORANGE LINE
+var mouseOverOrange = function(d){
+    tooltipBubble
+        .style("opacity", 1)
+        .style("fill", "orange")
+        
+    tooltip.style("opacity", 1)
+    
+    d3.select(this).style("fill-opacity", 1);
+}
+var mouseMoveOrange = function(d){
+        
+    tooltipBubble
+        .style("left", (d3.mouse(this)[0] + 330) + "px")
+        .style("top", (d3.mouse(this)[1] + 200) + "px")
+        
+    tooltip.html('<u>' + d.date + '</u>' + '<br>' + '<span style="color:maroon">' + d.injured + '</span>')
+}
+var mouseLeaveOrange = function(d){
+    tooltipBubble.style("opacity", 0)
+    tooltip.style("opacity", 0)
+    d3.select(this).style("fill-opacity", 0.7);
+}
+
 svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
@@ -164,50 +223,35 @@ svg.append("g")
 svg.append("path")
 	  .datum(data)
       .attr("fill", "none")
+	  .style("fill-opacity", 0.7)
       .attr("stroke", "steelblue")
       .attr("stroke-width", 1.5)
 	  .attr("stroke-linejoin", "round")
       .attr("d", d3.line()
         .x(function(d) { return x(d.date) })
-        .y(function(d) { return y(d.dead) })
-        );
+        .y(function(d) { return y(d.dead) }))
+	  .on("mouseover", mouseOverBlue)
+	  .on("mousemove", mouseMoveBlue)
+	  .on("mouseleave", mouseLeaveBlue);
 		
 svg.append("path")
 	  .datum(data)
       .attr("fill", "none")
+	  .style("fill-opacity", 0.7)
       .attr("stroke", "orange")
       .attr("stroke-width", 1.5)
 	  .attr("stroke-linejoin", "round")
       .attr("d", d3.line()
         .x(function(d) { return x(d.date) })
-        .y(function(d) { return y2(d.injured) })
-        );
+        .y(function(d) { return y2(d.injured) }))
+	  .on("mouseover", mouseOverOrange)
+	  .on("mousemove", mouseMoveOrange)
+	  .on("mouseleave", mouseLeaveOrange);
 
 
 <!-- CODE ENDS HERE-->
 }
 
-function tooltip(data){
-	d3.select('body')
-	.append('div')
-	.attr('id', 'tooltip')
-	.attr('style', 'position: absolute; opacity: 0;');
-
-d3.select('svg').selectAll('circle').data(data)
-	.join('circle')
-	.attr('r', 3)
-	.on('mouseover', function(d) {
-		d3.select('#tooltip').transition().duration(200).style('opacity', 1).text(d.dead)
-	})
-	.on('mouseout', function(d) {
-		d3.select('#tooltip').style('opacity', 0);
-	})
-	.on('mousemove', function() {
-		d3.select('#tooltip')
-		.style('left', (d3.event.pageX+10) + 'px')
-		.style('top', (d3.event.pageY+10) + 'px');
-	});
-}
 </script>
 
 

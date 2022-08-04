@@ -99,11 +99,9 @@ div.tooltip {
       adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     
 	<!-- SVG GOES HERE -->
-	<div>
-		<div id = 'svg' class="canvas"></div>
-		<div class="box">
-				<tooltip class="tooltip"></tooltip>
-		</div>
+	<div class="canvas">
+		<div id = 'svg' ></div>
+		
 	</div>
   <div class="float-container">
 	  <a class="btn" href="/index3.html">Next &nbsp;</a>
@@ -117,7 +115,7 @@ div.tooltip {
 
 // bubbleChart creation function; instantiate new bubble chart given a DOM element to display it in and a dataset to visualise
 function bubbleChart() {
-  const width = 800;
+  const width = 700;
   const height = 700;
 
   // location to centre the bubbles
@@ -202,13 +200,42 @@ function bubbleChart() {
 	const fillColour = d3.scaleLinear()
 		.domain([0,1466])
 		.range(["lightsalmon", "red"]);
+		
+	//FOR BUBBLE CHART
+	var bubbleTooltip = d3.select(".canvas")
+		.append("div")
+		.style("opacity", 0)
+		.style("background-color", "white")
+		.style("border", "solid")
+		.style("border-width", "2px")
+		.style("border-radius", "5px")
+		.style("padding", "5px")
+		
+	var mouseOver = function(d){
+		bubbleTooltip.style("opacity", 1)
+		d3.select(this).style("fill-opacity", 1);
+	}
+	var mouseMove = function(d){
+		bubbleTooltip
+			.html(.html('<u>' + d.state + '</u>' + '<br>' + 'No. of Shootings' + '<span><strong>' + d.occurrences + '</strong></span>' + 
+						'<br>' + 'No. Killed' + '<span><strong>' + d.dead + '</strong></span>' + '<br>' + 'No. Injured' + '<span><strong>' + 
+						d.injured + '</strong></span>'))
+			.style("left", (d3.mouse(this)[0] + 330) + "px")
+			.style("top", (d3.mouse(this)[1] + 200) + "px")
+	}
+	var mouseLeave = function(d){
+		bubbleTooltip.style("opacity", 0)
+		d3.select(this).style("fill-opacity", .8);
+	}
 	
-	console.log((d3.max(nodes, d => d.color)));
-
     bubbles = elements
       .append('circle')
       .attr('r', d => d.radius)
-      .attr('fill', function(d){ return fillColour(d.color);});
+      .attr('fill', function(d){ return fillColour(d.color);})
+	  .style("fill-opacity", 0.8)
+	  .on("mouseover", mouseOver)
+	  .on("mousemove", mouseMove)
+	  .on("mouseleave", mouseLeave);
 
     // labels
     labels = elements
