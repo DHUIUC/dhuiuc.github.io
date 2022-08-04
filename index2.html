@@ -24,6 +24,14 @@ h2{
 	text-align: center!important;
 }
 
+h4{
+	font-family: "Segoe UI",Arial,sans-serif;
+	font-weight: 400;
+	margin: 10px;
+	font-size: 16px;
+	text-align: center!important;
+}
+
 .canvas{
 	display: flex; 
 	justify-content: center;
@@ -100,12 +108,13 @@ div.tooltip {
     
 	<!-- SVG GOES HERE -->
 	<div class="canvas">
+		<h4>Mass Shootings Per State</h4>
 		<div id = 'svg' ></div>
 		
 	</div>
   <div class="float-container">
-	  <a class="btn" href="/index3.html">Next &nbsp;</a>
-	  <a class="btn" href="/index.html">Prev &nbsp;</a>
+  	  <a style="float:left" class="btn" href="/index.html">Prev &nbsp;</a>
+	  <a style="float:right" class="btn" href="/index3.html">Next &nbsp;</a>
   </div>
 <!-- End Page Content -->
 </div>
@@ -218,10 +227,10 @@ function bubbleChart() {
 	}
 	var mouseMove = function(d){
 		bubbleTooltip
-			.html('<u>' + d.state + '</u>' + '<br>' + 'No. of Shootings: ' + '<span><strong>' + d.occurrences + '</strong></span>' + 
+			.html('<b><u>' + d.state + '</u></b>' + '<br>' + 'No. of Shootings: ' + '<span><strong>' + d.occurrences + '</strong></span>' + 
 						'<br>' + 'No. Killed: ' + '<span><strong>' + d.dead + '</strong></span>' + '<br>' + 'No. Injured: ' + '<span><strong>' + 
 						d.injured + '</strong></span>')
-			.style("left", (d3.mouse(this)[0]+370) + "px")
+			.style("left", (d3.mouse(this)[0]+400) + "px")
 			.style("top", (d3.mouse(this)[1]+170) + "px")
 	}
 	var mouseLeave = function(d){
