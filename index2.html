@@ -76,9 +76,7 @@ h2{
 	
 div.tooltip {	
     position: absolute;			
-    text-align: center;			
-    width: 60px;					
-    height: 28px;					
+    text-align: center;							
     padding: 2px;				
     font: 12px sans-serif;		
     background: lightsteelblue;	
@@ -206,6 +204,7 @@ function bubbleChart() {
 	//FOR BUBBLE CHART
 	var bubbleTooltip = d3.select(".canvas")
 		.append("div")
+		.classed("tooltip", true)
 		.style("opacity", 0)
 		.style("background-color", "white")
 		.style("border", "solid")
