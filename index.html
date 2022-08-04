@@ -178,8 +178,8 @@ var mouseOverBlue = function(d){
 var mouseMoveBlue = function(d){
         
     tooltipBubble
-        .attr("cx", (d3.mouse(this)[0]) + "px")
-        .attr("cy", (d3.mouse(this)[1]) + "px")
+        .attr("cx", (d3.mouse(this)[0]+40) + "px")
+        .attr("cy", (d3.mouse(this)[1]+10) + "px")
         
     tooltip.html('<u>' + d.date + '</u>' + '<br>' + '<span style="color:maroon">' + d.dead + '</span>')
 }
@@ -201,8 +201,8 @@ var mouseOverOrange = function(d){
 var mouseMoveOrange = function(d){
         
     tooltipBubble
-        .attr("cx", (d3.mouse(this)[0]) + "px")
-        .attr("cy", (d3.mouse(this)[1]) + "px")
+        .attr("cx", (d3.mouse(this)[0]+50) + "px")
+        .attr("cy", (d3.mouse(this)[1]+15) + "px")
         
     tooltip.html('<u>' + d.date + '</u>' + '<br>' + '<span style="color:maroon">' + d.injured + '</span>')
 }
@@ -225,7 +225,7 @@ svg.append("path")
       .attr("fill", "none")
 	  .style("stroke-opacity", 0.7)
       .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
+      .attr("stroke-width", 3)
 	  .attr("stroke-linejoin", "round")
       .attr("d", d3.line()
         .x(function(d) { return x(d.date) })
@@ -239,7 +239,7 @@ svg.append("path")
       .attr("fill", "none")
 	  .style("stroke-opacity", 0.7)
       .attr("stroke", "orange")
-      .attr("stroke-width", 1.5)
+      .attr("stroke-width", 3)
 	  .attr("stroke-linejoin", "round")
       .attr("d", d3.line()
         .x(function(d) { return x(d.date) })
