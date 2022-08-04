@@ -14,7 +14,9 @@ body{
 	line-height: 1.5;
 }
 
-
+.new{
+	opacity: 0;
+}
 	
 h2{
 	font-family: "Segoe UI",Arial,sans-serif;
@@ -106,8 +108,9 @@ div.tooltip {
 	<p class="txt">Few states have been fortunate enough to not experience the tragedy of a mass shooting in recent years. Though, as a nation, 
 					   we have all been deeply impacted by each occurrence. </p>
 					   
-	<p class="txt new">Few states have been fortunate enough to not experience the tragedy of a mass shooting in recent years. Though, as a nation, 
-					   we have all been deeply impacted by each occurrence. </p>
+	<p class="txt new">These tragedies have sparked outcries for change, whether that be in the form of mental health
+					   accessibility, stricter gun legislation, among many other suggestions. There likely is no perfect solution to the epidemic of mass shootings,
+					   but what is important is preventing them where possible.</p>
 					   
 	<h4>State Mass Shootings Per 100,000</h4>
 	<!-- SVG GOES HERE -->
@@ -129,6 +132,10 @@ div.tooltip {
 function bubbleChart() {
   const width = 800;
   const height = 700;
+
+	d3.selectAll(".new")
+		.transition()
+		.style("opacity",1);
 
   // location to centre the bubbles
   const centre = { x: width/2, y: height/2 };

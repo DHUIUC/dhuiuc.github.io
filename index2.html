@@ -14,7 +14,9 @@ body{
 	line-height: 1.5;
 }
 
-
+.new{
+	opacity: 0;
+}
 	
 h2{
 	font-family: "Segoe UI",Arial,sans-serif;
@@ -128,6 +130,10 @@ div.tooltip {
 function bubbleChart() {
   const width = 700;
   const height = 700;
+
+	d3.selectAll(".new")
+		.transition()
+		.style("opacity",1);
 
   // location to centre the bubbles
   const centre = { x: width/2, y: height/2 };
