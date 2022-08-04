@@ -153,7 +153,7 @@ var x = d3.scaleTime().domain([d3.min(data, function(d) { return d.date; }),
 							   d3.max(data, function(d) { return d.date; })])
 					  .range([ 0, width ]);
 
-var scaleHeightY = (d3.max(data, function(d) { return +d.dead; }) / 
+var scaleHeightY = height - (d3.max(data, function(d) { return +d.dead; }) / 
 					   d3.max(data, function(d) { return +d.injured; }) * 
 					   height);
 
