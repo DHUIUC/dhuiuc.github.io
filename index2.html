@@ -217,9 +217,9 @@ function bubbleChart() {
 	}
 	var mouseMove = function(d){
 		bubbleTooltip
-			.html(.html('<u>' + d.state + '</u>' + '<br>' + 'No. of Shootings' + '<span><strong>' + d.occurrences + '</strong></span>' + 
+			.html('<u>' + d.state + '</u>' + '<br>' + 'No. of Shootings' + '<span><strong>' + d.occurrences + '</strong></span>' + 
 						'<br>' + 'No. Killed' + '<span><strong>' + d.dead + '</strong></span>' + '<br>' + 'No. Injured' + '<span><strong>' + 
-						d.injured + '</strong></span>'))
+						d.injured + '</strong></span>')
 			.style("left", (d3.mouse(this)[0] + 330) + "px")
 			.style("top", (d3.mouse(this)[1] + 200) + "px")
 	}

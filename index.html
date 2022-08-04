@@ -173,20 +173,20 @@ var mouseOverBlue = function(d){
         
     tooltip.style("opacity", 1)
     
-    d3.select(this).style("fill-opacity", 1);
+    d3.select(this).style("stroke-opacity", 1);
 }
 var mouseMoveBlue = function(d){
         
     tooltipBubble
-        .style("left", (d3.mouse(this)[0] + 330) + "px")
-        .style("top", (d3.mouse(this)[1] + 200) + "px")
+        .attr("cx", (d3.mouse(this)[0] + 330) + "px")
+        .attr("cy", (d3.mouse(this)[1] + 200) + "px")
         
     tooltip.html('<u>' + d.date + '</u>' + '<br>' + '<span style="color:maroon">' + d.dead + '</span>')
 }
 var mouseLeaveBlue = function(d){
     tooltipBubble.style("opacity", 0)
     tooltip.style("opacity", 0)
-    d3.select(this).style("fill-opacity", 0.7);
+    d3.select(this).style("stroke-opacity", 0.7);
 }
 //MOUSE EVENTS ORANGE LINE
 var mouseOverOrange = function(d){
@@ -196,7 +196,7 @@ var mouseOverOrange = function(d){
         
     tooltip.style("opacity", 1)
     
-    d3.select(this).style("fill-opacity", 1);
+    d3.select(this).style("stroke-opacity", 1);
 }
 var mouseMoveOrange = function(d){
         
@@ -209,7 +209,7 @@ var mouseMoveOrange = function(d){
 var mouseLeaveOrange = function(d){
     tooltipBubble.style("opacity", 0)
     tooltip.style("opacity", 0)
-    d3.select(this).style("fill-opacity", 0.7);
+    d3.select(this).style("stroke-opacity", 0.7);
 }
 
 svg.append("g")
@@ -223,7 +223,7 @@ svg.append("g")
 svg.append("path")
 	  .datum(data)
       .attr("fill", "none")
-	  .style("fill-opacity", 0.7)
+	  .style("stroke-opacity", 0.7)
       .attr("stroke", "steelblue")
       .attr("stroke-width", 1.5)
 	  .attr("stroke-linejoin", "round")
@@ -237,7 +237,7 @@ svg.append("path")
 svg.append("path")
 	  .datum(data)
       .attr("fill", "none")
-	  .style("fill-opacity", 0.7)
+	  .style("stroke-opacity", 0.7)
       .attr("stroke", "orange")
       .attr("stroke-width", 1.5)
 	  .attr("stroke-linejoin", "round")
