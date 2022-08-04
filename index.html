@@ -198,12 +198,12 @@ var mouseMoveBlue = function(d){
         
     tooltipBubble
         .attr("cx", (d3.mouse(this)[0]+60) + "px")
-        .attr("cy", (d3.mouse(this)[1]+15) + "px")
+        .attr("cy", (d3.mouse(this)[1]+300) + "px")
         
     tooltip.html('<b><u>' + formatDate(x.invert(d3.mouse(this)[0])) + '</u><b>' + '<br>' + 'No. Killed: <span style="color:maroon">'
 				 + Math.round(y.invert(d3.mouse(this)[1])) + '</span>')
-	.style("left", (d3.mouse(this)[0]+200) + "px")
-	.style("top", (d3.mouse(this)[1]+350) + "px")			 
+	.style("left", (d3.mouse(this)[0]+240) + "px")
+	.style("top", (d3.mouse(this)[1]+480) + "px")			 
 	
 }
 var mouseLeaveBlue = function(d){
@@ -255,7 +255,7 @@ svg.append("path")
 	  .datum(data)
       .attr("fill", "none")
 	  .style("stroke-opacity", 0.7)
-	  .attr("transform","translate("+0+","+350+")")
+	  .attr("transform","translate("+0+","+400+")")
       .attr("stroke", "steelblue")
       .attr("stroke-width", 2)
 	  .attr("stroke-linejoin", "round")
