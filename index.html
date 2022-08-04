@@ -159,7 +159,7 @@ var scaleHeightY = -1 * ((d3.max(data, function(d) { return +d.dead; }) /
 
 //This is only for the number of deaths			  
 var y = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.dead; })])
-						 .range([scaleHeightY, 0 ]);
+						 .range([height, 0 ]);
 	  
 //This is only for the number of injured
 var y2 = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.injured; })])
@@ -260,7 +260,7 @@ svg.append("path")
 	  .attr("stroke-linejoin", "round")
       .attr("d", d3.line()
         .x(function(d) { return x(d.date) })
-        .y(function(d) { return y(d.dead) }))
+        .y(function(d) { return y2(d.dead) }))
 	  .on("mouseover", mouseOverBlue)
 	  .on("mousemove", mouseMoveBlue)
 	  .on("mouseleave", mouseLeaveBlue);
