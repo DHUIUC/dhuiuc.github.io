@@ -28,7 +28,7 @@ h2{
 
 h4{
 	font-family: "Segoe UI",Arial,sans-serif;
-	font-weight: 400;
+	font-weight: bold;
 	margin: 10px;
 	font-size: 16px;
 	text-align: center!important;
@@ -105,9 +105,9 @@ div.tooltip {
       ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
       adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     
+	<h4>Mass Shootings Over the Past 4 Years</h4>
 	<!-- SVG GOES HERE -->
 	<div class="canvas">
-	  <h4>Mass Shootings Over the Past 4 Years</h4>
 		<svg></svg>
 		
 		
@@ -193,9 +193,10 @@ var mouseMoveBlue = function(d){
         .attr("cx", (d3.mouse(this)[0]+60) + "px")
         .attr("cy", (d3.mouse(this)[1]+15) + "px")
         
-    tooltip.html('<u>' + formatDate(x.invert(d3.mouse(this)[0])) + '</u>' + '<br>' + 'No. Killed: <span style="color:maroon">'
+    tooltip.html('<b><u>' + formatDate(x.invert(d3.mouse(this)[0])) + '</u><b>' + '<br>' + 'No. Killed: <span style="color:maroon">'
 				 + y.invert(d3.mouse(this)[0]) + '</span>')
-				 
+	.style("left", (d3.mouse(this)[0]+200) + "px")
+	.style("top", (d3.mouse(this)[1]+170) + "px")			 
 	
 }
 var mouseLeaveBlue = function(d){
@@ -221,6 +222,8 @@ var mouseMoveOrange = function(d){
         
     tooltip.html('<u>' + formatDate(x.invert(d3.mouse(this)[0])) + '</u>' + '<br>' + 'No. Injured: <span style="color:maroon">'
 				 + y2.invert(d3.mouse(this)[0]) + '</span>')
+			.style("left", (d3.mouse(this)[0]+200) + "px")
+			.style("top", (d3.mouse(this)[1]+170) + "px")
 }
 var mouseLeaveOrange = function(d){
     tooltipBubble.style("opacity", 0)
