@@ -202,6 +202,8 @@ function bubbleChart() {
 		.range(["ghostwhite", "chocolate"]);
 	
 	console.log((d3.max(nodes, d => d.color)));
+	
+	const lawArr = ["lax", "lenient", "medium", "more strict" ,"strict"]
 
     //FOR BUBBLE CHART
 	var bubbleTooltip = d3.select(".canvas")
@@ -220,7 +222,7 @@ function bubbleChart() {
 	var mouseMove = function(d){
 		bubbleTooltip
 			.html('<u>' + d.state + '</u>' + '<br>' + 'No. of Shootings: ' + '<span><strong>' + d.occurrences + '</strong></span>' + 
-						'<br>' + 'Gun Law Strictness: ' + '<span><strong>' + d.legislation + '</strong></span>' + '<br>' + 'Shootings per 100,000: ' + '<span><strong>' + 
+						'<br>' + 'Gun Law Strictness: ' + '<span><strong>' + lawArr[+d.legislation] + '</strong></span>' + '<br>' + 'Shootings per 100,000: ' + '<span><strong>' + 
 						(Math.round(+d.rate * 1000) / 1000) + '</strong></span>')
 			.style("left", (d3.mouse(this)[0]) + "px")
 			.style("top", (d3.mouse(this)[1]) + "px")
