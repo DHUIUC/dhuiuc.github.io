@@ -14,7 +14,9 @@ body{
 	line-height: 1.5;
 }
 
-
+.new{
+	opacity: 0;
+}
 	
 h2{
 	font-family: "Segoe UI",Arial,sans-serif;
@@ -85,8 +87,7 @@ div.tooltip {
     text-align: center;								
     padding: 2px;				
     font: 12px sans-serif;		
-    background: lightsteelblue;	
-    border: 0px;		
+    border: px;		
     border-radius: 8px;			
     pointer-events: none;			
 }
@@ -168,6 +169,11 @@ var tooltipBubble = d3.select("svg").append("circle")
 var tooltip = d3.select(".canvas")
     .append("div")
 	.classed("tooltip", true)
+	.style("background-color", "white")
+	.style("border", "solid")
+	.style("border-width", "2px")
+	.style("border-radius", "5px")
+	.style("padding", "5px")
     .style("opacity", 0)
     
 //add text styling if needed
@@ -189,6 +195,8 @@ var mouseMoveBlue = function(d){
         
     tooltip.html('<u>' + formatDate(x.invert(d3.mouse(this)[0])) + '</u>' + '<br>' + 'No. Killed: <span style="color:maroon">'
 				 + y.invert(d3.mouse(this)[0]) + '</span>')
+				 
+	
 }
 var mouseLeaveBlue = function(d){
     tooltipBubble.style("opacity", 0)
@@ -263,6 +271,12 @@ svg.append("path")
 
 
 <!-- CODE ENDS HERE-->
+}
+
+function fadeIn(){
+	d3.selectAll(".new")
+		.transition()
+		.style("opacity",1);
 }
 
 </script>
