@@ -194,7 +194,7 @@ var mouseMoveBlue = function(d){
         .attr("cy", (d3.mouse(this)[1]+15) + "px")
         
     tooltip.html('<b><u>' + formatDate(x.invert(d3.mouse(this)[0])) + '</u><b>' + '<br>' + 'No. Killed: <span style="color:maroon">'
-				 + y.invert(d3.mouse(this)[0]) + '</span>')
+				 + y(d3.mouse(this)[0]) + '</span>')
 	.style("left", (d3.mouse(this)[0]+200) + "px")
 	.style("top", (d3.mouse(this)[1]+170) + "px")			 
 	
@@ -221,8 +221,8 @@ var mouseMoveOrange = function(d){
         .attr("cy", (d3.mouse(this)[1]+15) + "px")
         
     tooltip.html('<u>' + formatDate(x.invert(d3.mouse(this)[0])) + '</u>' + '<br>' + 'No. Injured: <span style="color:maroon">'
-				 + y2.invert(d3.mouse(this)[0]) + '</span>')
-			.style("left", (d3.mouse(this)[0]+200) + "px")
+				 + y2(d3.mouse(this)[0]) + '</span>')
+			.style("left", (d3.mouse(this)[0]+260) + "px")
 			.style("top", (d3.mouse(this)[1]+170) + "px")
 }
 var mouseLeaveOrange = function(d){

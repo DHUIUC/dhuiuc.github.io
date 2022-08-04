@@ -26,7 +26,7 @@ h2{
 
 h4{
 	font-family: "Segoe UI",Arial,sans-serif;
-	font-weight: 400;
+	font-weight: bold;
 	margin: 10px;
 	font-size: 16px;
 	text-align: center!important;
@@ -232,7 +232,7 @@ function bubbleChart() {
 			.html('<u>' + d.state + '</u>' + '<br>' + 'No. of Shootings: ' + '<span><strong>' + d.occurrences + '</strong></span>' + 
 						'<br>' + 'Gun Law Strictness: ' + '<span><strong>' + lawArr[+d.legislation] + '</strong></span>' + '<br>' + 'Shootings per 100,000: ' + '<span><strong>' + 
 						(Math.round(+d.rate * 1000) / 1000) + '</strong></span>')
-			.style("left", (d3.mouse(this)[0]+370) + "px")
+			.style("left", (d3.mouse(this)[0]+390) + "px")
 			.style("top", (d3.mouse(this)[1]+170) + "px")
 	}
 	var mouseLeave = function(d){
