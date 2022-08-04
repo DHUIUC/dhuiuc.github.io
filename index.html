@@ -100,11 +100,10 @@ div.tooltip {
 <!-- Page content -->
 <div style="max-width:2000px;margin-top:46px">
 
-    <h2 >THE BAND</h2>
-     <p class="txt">We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-      ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
-      adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    
+    <h2 >United States Mass Shooting Index</h2>
+     <p class="txt new">Each year, the United States suffers numerous tragedies in the form of mass shootings. These cruel acts of terror have changed the 
+				   lives of many Americans for the worst. Many lives have been lost. Many have been injured; physically, mentally, and emotionally.</p>
+				   
 	<h4>Mass Shootings Over the Past 4 Years</h4>
 	<!-- SVG GOES HERE -->
 	<div class="canvas">
@@ -194,7 +193,7 @@ var mouseMoveBlue = function(d){
         .attr("cy", (d3.mouse(this)[1]+15) + "px")
         
     tooltip.html('<b><u>' + formatDate(x.invert(d3.mouse(this)[0])) + '</u><b>' + '<br>' + 'No. Killed: <span style="color:maroon">'
-				 + y(d3.mouse(this)[0]) + '</span>')
+				 + y.invert(d3.mouse(this)[1]) + '</span>')
 	.style("left", (d3.mouse(this)[0]+200) + "px")
 	.style("top", (d3.mouse(this)[1]+170) + "px")			 
 	
@@ -221,7 +220,7 @@ var mouseMoveOrange = function(d){
         .attr("cy", (d3.mouse(this)[1]+15) + "px")
         
     tooltip.html('<u>' + formatDate(x.invert(d3.mouse(this)[0])) + '</u>' + '<br>' + 'No. Injured: <span style="color:maroon">'
-				 + y2(d3.mouse(this)[0]) + '</span>')
+				 + y2.invert(d3.mouse(this)[1]) + '</span>')
 			.style("left", (d3.mouse(this)[0]+260) + "px")
 			.style("top", (d3.mouse(this)[1]+170) + "px")
 }
