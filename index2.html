@@ -221,7 +221,7 @@ function bubbleChart() {
 						'<br>' + 'No. Killed: ' + '<span><strong>' + d.dead + '</strong></span>' + '<br>' + 'No. Injured: ' + '<span><strong>' + 
 						d.injured + '</strong></span>')
 			.style("left", (d3.mouse(this)[0]) + "px")
-			.style("top", (d3.mouse(this)[1] + "px")
+			.style("top", (d3.mouse(this)[1]) + "px")
 	}
 	var mouseLeave = function(d){
 		bubbleTooltip.style("opacity", 0)
