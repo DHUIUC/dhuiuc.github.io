@@ -261,6 +261,7 @@ svg.append("path")
       .attr("d", d3.line()
         .x(function(d) { return x(d.date) })
         .y(function(d) { return y(d.dead) }))
+	  .attr("y", height)
 	  .on("mouseover", mouseOverBlue)
 	  .on("mousemove", mouseMoveBlue)
 	  .on("mouseleave", mouseLeaveBlue);
