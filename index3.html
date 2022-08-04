@@ -42,7 +42,7 @@ h2{
 	position: absolute;			
     text-align: center;	
 	font-size: 18px;
-	line-height: 1.5;
+	max-height: 140px;
 }
 
 .float-container {
@@ -206,8 +206,9 @@ function bubbleChart() {
 	const lawArr = ["lax", "lenient", "medium", "more strict" ,"strict"]
 
     //FOR BUBBLE CHART
-	var bubbleTooltip = d3.select(".canvas")
+	var bubbleTooltip = d3.select("svg")
 		.append("div")
+		.classed("tooltip")
 		.style("opacity", 0)
 		.style("background-color", "white")
 		.style("border", "solid")
