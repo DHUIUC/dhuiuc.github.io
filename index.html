@@ -260,7 +260,7 @@ svg.append("path")
 	  .attr("stroke-linejoin", "round")
       .attr("d", d3.line()
         .x(function(d) { return x(d.date) })
-        .y(function(d) { return (height - y(d.dead) })))
+        .y(function(d) { return (height - y(d.dead) )}))
 	  .on("mouseover", mouseOverBlue)
 	  .on("mousemove", mouseMoveBlue)
 	  .on("mouseleave", mouseLeaveBlue);
