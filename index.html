@@ -132,6 +132,10 @@ const data = await d3.csv("https://raw.githubusercontent.com/DHUIUC/dhuiuc.githu
 	};
 });
 
+d3.selectAll(".new")
+		.transition()
+		.style("opacity",1);
+
 console.log(data);
 
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
@@ -275,11 +279,6 @@ svg.append("path")
 <!-- CODE ENDS HERE-->
 }
 
-function fadeIn(){
-	d3.selectAll(".new")
-		.transition()
-		.style("opacity",1);
-}
 
 </script>
 
