@@ -155,7 +155,7 @@ var x = d3.scaleTime().domain([d3.min(data, function(d) { return d.date; }),
 
 //This is only for the number of deaths			  
 var y = d3.scaleLinear().domain([0, d3.max(data, function(d) { return +d.dead; })])
-						 .range(([ d3.max(data, function(d) { return +d.dead; }) *
+						 .range([(d3.max(data, function(d) { return +d.dead; }) *
 						 height/d3.max(data, function(d) { return +d.injured; })), 0 ]);
 	  
 //This is only for the number of injured
